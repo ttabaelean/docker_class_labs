@@ -1,4 +1,6 @@
-# Install Docker (Rocky Linux 9)
+# 2. 도커 설치와 도커 관리자 생성하기
+
+## 2.1 Install Docker (Rocky Linux 9)
 
 ### [**Set up the repository**](https://docs.docker.com/engine/install/rhel/#set-up-the-repository)
 
@@ -39,4 +41,43 @@ Install the **`dnf-plugins-core`** package (which provides the commands to man
      Context:           default
     permission denied while trying to connect to the docker API at unix:///var/run/docker.sock
     
+    ```
+
+
+## 2.2 Docker 관리자 권한 설정
+
+## docker 그룹 확인 후 admin 사용자를 docker 그룹에 추가
+
+- Docker 설치 시 자동으로 생성됩니다.
+    
+    ```bash
+    getent group docker
+    ```
+    
+- admin 사용자를 docker 그룹에 추가
+    
+    ```bash
+    sudo usermod -aG docker admin
+    ```
+    
+- 그룹 적용 확인
+    
+    ```bash
+    id admin
+    ```
+    
+- 로그아웃 후 재로그인
+그룹 변경은 **로그인 세션을 다시 시작해야 적용**됩니다.
+    
+    ```bash
+    newgrp docker
+    ```
+    
+
+### Docker 명령 테스트
+
+- docker version 정보보기
+    
+    ```bash
+    docker version
     ```
