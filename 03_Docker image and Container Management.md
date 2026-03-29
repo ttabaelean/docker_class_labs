@@ -45,50 +45,68 @@ nginx 컨테이너 이미지 삭제
 docker rmi nginx
 docker iamges
 ```
+---
 ## 2. 컨테이너 관리 명령어
 
 ### 컨테이너 이미지 다운로드 
 1) 웹서버 컨테이너인 nginx 컨테이너 이미지를 다시 다운로드 받아 이번에는 컨테이너로 간단하게 실행해보자.
+```bash
 docker pull nginx
+```
 
 2) 다운로드 받은 이미지 확인
+```bash
 docker images
-
+```
 
 ### 컨테이너 실행
 1) 다운로드 받은 nginx 컨테이너를 web-nginx라는 이름으로 실행해보자.
+```bash
 docker run -d --name web-nginx nginx:latest
-
+```
 -d: Detached mode로 컨테이너를 실행
 --name: 컨테이너의 이름을 지정. 이름을 지정하지 않으면 Docker가 임의의 이름을 생성
 nginx:latest: 사용할 이미지와 태그를 지정
 
 
 2) 동작중인 컨테이너 확인
+```bash
 docker ps
 docker ps -a
+```
 
 3) 동작중인 컨테이너의 IP Address 확인
+```bash
 docker inspect web-nginx
+```
 
 4) 동작중인 컨테이너에 접속 TEST
+```bash
 curl 172.17.0.2
+```
 
 5) web-nginx 컨테이너를 중지시킨다.
+```bash
 docker stop web-nginx
 docker ps
 docker ps -a
+```
 
 6) 컨테이너 삭제
+```bash
 docker rm -f web-nginx
+```
 
 무엇이 삭제되었나?
+```bash
 docker ps -a
 docker images
-
-
+```
+---
 ## 3. 실습: apache 웹 서버 실행하기
-1. httpd라는 이름의 오피셜 컨테이너 이미지를 검색하여 STARS와 OFFICIAL 상태를 확인하시오. 
+1. httpd라는 이름의 오피셜 컨테이너 이미지를 검색하여 STARS와 OFFICIAL 상태를 확인하시오.
+```bash
+```
 
 2. httpd 이미지를 Docker Hub에서 로컬로 다운로드합니다.
    
