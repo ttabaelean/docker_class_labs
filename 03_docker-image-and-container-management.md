@@ -4,38 +4,47 @@
     도커 허브에서 이미지 검색
 ```bash
 docker search nginx
+```
 
 2) nginx 웹서버 컨테이너 이미지 다운로드. 이미지를 내려받을 때 사용하는 태그, 레이어, 이미지 고유 식별 값을 확인
 ```bash
 docker pull nginx
+```
 
 3) 다운로드 받은 이미지 확인
 ```bash
 docker images
+```
 
 4) busybox 컨테이너 이미지를 다운로드 받고, 다운로드 받은 이미지를 확인
+```bash
 docker pull busybox
 docker images
-
+```
 
 5) 이미지 생성 과정에 대한 자세한 이력 보기
 docker history : 이미지의 생성 이력을 확인하는 데 사용. 이미지가 어떻게 만들어졌는지, Dockerfile의 어떤 명령들이 사용되었는지, 그리고 각 명령이 어떤 레이어를 추가했는지 확인 가능
+```bash
 docker history nginx
+```
 
 docker inspect : Docker 이미지나 컨테이너의 세부 정보를 JSON 형식으로 출력.이미지의 메타데이터, 환경 변수, 네트워크 설정, 파일 경로, 레이어 정보 등 다양한 정보를 포함
+```bash
 docker inspect nginx
 docker inspect web-nginx | grep IPAddress
-
+```
 
 6) busybox 컨테이너 이미지 삭제하기
+```bash
 web-nginx 컨테이너 삭제
 docker rm -f web-nginx
 docker ps
-
+```
 nginx 컨테이너 이미지 삭제
+```bash
 docker rmi nginx
 docker iamges
-
+```
 ## 2. 컨테이너 관리 명령어
 
 ### 컨테이너 이미지 다운로드 
