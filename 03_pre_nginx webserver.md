@@ -20,6 +20,8 @@
 
 👉 이번 실습에서는 가볍고 빠르며 널리 사용되는 **Nginx 웹서버**를 사용한다.
 
+</br>
+
 ### 2. 웹서버 프로그램 설치
 
 - Rocky Linux 9 에서 Nginx 웹서버 설치하기
@@ -36,9 +38,10 @@
     systemctl enable --now nginx
     systemctl status nginx
     ```
-    
 
-### 4.  웹 문서(index.html) 만들기
+</br>
+
+### 3.  웹 문서(index.html) 만들기
 
 - 웹문서가 위치한 디렉토리로 이동
     
