@@ -1,5 +1,7 @@
 # 05. Container Monitoring and Resource Limits
 
+<br>
+
 ## 1. 컨테이너 모니터링
 
 ### **실습 준비**
@@ -21,6 +23,8 @@ RUN apt-get update; apt-get install stress -y
 CMD ["stress", "--cpu", "8"]
 ```
 
+<br>
+
 **부하 모니터링 도구(htop) 설치**
 - **htop**은 리눅스 시스템의 리소스(CPU, 메모리, 프로세스) 사용량을 실시간으로 보여주는 대화형 프로세스 뷰어입니다.
 - **주요 단축키**:
@@ -37,6 +41,7 @@ sudo dnf -y install htop
 alias crm='docker rm -f $(docker ps -aq)'
 ```
 
+<br>
 ---
 
 ### **1.1 기본 명령어를 이용한 모니터링**
@@ -53,6 +58,8 @@ docker run -d --name monitor-test smlinux/stress stress --cpu 2 --vm 1 --vm-byte
 docker stats monitor-test
 ```
 > **확인 사항**: CPU 사용률이 몇 %까지 올라가는지, 메모리 사용량(MEM USAGE)은 얼마인지 확인합니다.
+
+<br>
 
 **2. 로그 및 프로세스 확인**
 - Nginx 웹 서버를 통해 실시간 접속 로그와 내부 프로세스를 확인합니다.
@@ -72,11 +79,15 @@ docker logs -f log-test
 docker top log-test
 ```
 
+<br>
+
 **3. 호스트 OS 관점의 모니터링 (htop)**
 ```bash
 htop
 ```
 > **확인 사항**: 상단 CPU 바에서 어떤 코어가 사용 중인지 확인하고, `F4`로 stress 프로세스를 검색하여 관찰합니다.
+
+<br>
 
 ---
 
@@ -105,12 +116,16 @@ sudo docker run \
   --privileged \
   --device=/dev/kmsg \
   ghcr.io/google/cadvisor:$VERSION
+```
 
+> **확인**: `http://[서버-IP]:8080` 접속 후 Docker Containers 메뉴에서 그래프를 확인합니다.
+<img width="933" height="899" alt="Image" src="https://github.com/user-attachments/assets/75c31864-ee66-4c02-822e-4d9a07b33640" />
+<br>
+
+```bash
 # 실습 종료 후 삭제
 crm
 ```
-> **확인**: `http://[서버-IP]:8080` 접속 후 Docker Containers 메뉴에서 그래프를 확인합니다.
-> <img width="933" height="899" alt="Image" src="https://github.com/user-attachments/assets/75c31864-ee66-4c02-822e-4d9a07b33640" />
 <br>
 
 ---
