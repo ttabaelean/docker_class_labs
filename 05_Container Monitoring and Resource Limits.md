@@ -42,6 +42,7 @@ alias crm='docker rm -f $(docker ps -aq)'
 ```
 
 <br>
+
 ---
 
 ### **1.1 기본 명령어를 이용한 모니터링**
@@ -164,6 +165,7 @@ crm
 ```
 <img width="1000" height="278" alt="Image" src="https://github.com/user-attachments/assets/bcfaa029-6dca-4bef-95fd-0a08581ea62f" />
 
+<br>
 <br>
 
 ---
