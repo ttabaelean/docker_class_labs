@@ -110,6 +110,8 @@ sudo docker run \
 crm
 ```
 > **확인**: `http://[서버-IP]:8080` 접속 후 Docker Containers 메뉴에서 그래프를 확인합니다.
+> <img width="933" height="899" alt="Image" src="https://github.com/user-attachments/assets/75c31864-ee66-4c02-822e-4d9a07b33640" />
+<br>
 
 ---
 
@@ -131,6 +133,7 @@ docker ps -a
 # 시스템 로그 확인 (OOM Killer 작동 여부 검증)
 sudo journalctl -r
 ```
+<br>
 
 ---
 
@@ -141,8 +144,12 @@ docker run -d --name cpu-pin --cpuset-cpus 0 smlinux/stress stress --cpu 2
 
 # htop으로 0번 CPU만 가동되는지 확인
 htop
+
 crm
 ```
+<img width="1000" height="278" alt="Image" src="https://github.com/user-attachments/assets/bcfaa029-6dca-4bef-95fd-0a08581ea62f" />
+
+<br>
 
 ---
 
@@ -156,6 +163,7 @@ docker run -d --name cpu-low --cpu-shares 512 smlinux/stress stress --cpu 2
 docker stats
 crm
 ```
+<br>
 
 ---
 
@@ -168,6 +176,7 @@ docker run -d --name cpu-limit --cpus 0.5 smlinux/stress stress --cpu 2
 docker stats
 crm
 ```
+<br>
 
 ---
 
@@ -182,6 +191,8 @@ docker run -d -p 8001:80 --name=webserver1 nginx:1.18
 # 2. 호스트 포트 점유 확인
 sudo netstat -nlp | grep 8001
 ```
+<br>
+
 
 ### **3.2 서비스 관제 (Monitoring)**
 ```bash
@@ -191,6 +202,8 @@ docker stats webserver1
 docker logs -f webserver1
 docker top webserver1
 ```
+<br>
+
 
 ### **3.3 서비스 제어 및 상태 변화 관찰**
 ```bash
@@ -201,6 +214,8 @@ curl localhost:8001
 # 서비스 재개
 docker start webserver1
 ```
+<br>
+
 
 ### **3.4 고급 시각화 도구 활용**
 - **cAdvisor 접속**: `http://[호스트IP]:8080`
