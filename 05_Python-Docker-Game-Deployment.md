@@ -2,6 +2,8 @@
 
 본 실습에서는 내가 만든 파이썬 코드를 도커 컨테이너로 복사하여 웹 서비스를 실행하고, 코드를 수정하여 서비스에 즉시 반영하는 배포(Deployment) 과정을 학습합니다.
 
+<br>
+
 ### 1단계: 실습 환경 준비 (호스트 OS)
 작업할 디렉토리를 만들고 이동합니다.
 
@@ -10,6 +12,9 @@
 mkdir ~/weplat-lab 
 cd ~/weplat-lab
 ```
+
+<br>
+
 
 파이썬 게임 코드 파일 생성
 
@@ -103,6 +108,9 @@ ls
 cat box_game_py.py
 ```
 
+<br>
+
+
 ### 2단계: 컨테이너 생성 및 코드 배포 (Deploy)
 작성한 파이썬 파일을 컨테이너 안으로 밀어 넣고 실행합니다.
 
@@ -120,6 +128,9 @@ docker cp box_game_py.py box-server:/box_game_py.py
 docker exec -d box-server python3 /box_game_py.py
 ```
 
+<br>
+
+
 **결과 확인:** 웹 브라우저를 열고 `http://192.168.100.10:8089`에 접속합니다.
 
 ### 3단계: 코드 수정 및 재배포 실습
@@ -128,11 +139,17 @@ docker exec -d box-server python3 /box_game_py.py
 **파일 수정:**
 `vi box_game_py.py` 명령어로 `BOX_SPEED`를 20으로, `SPAWN_RATE`를 300으로 수정하고 저장합니다.
 
+<br>
+
+
 **파일 재복사:** 수정된 파일을 컨테이너에 다시 덮어씁니다.
 
 ```bash
 docker cp box_game_py.py box-server:/box_game_py.py
 ```
+
+<br>
+
 
 **서버 재시작:** 컨테이너를 재시작하여 바뀐 코드가 실행되도록 합니다.
 
@@ -143,7 +160,13 @@ docker restart box-server
 docker exec -d  box-server python3 /box_game_py.py
 ```
 
+<br>
+
+
 **결과 확인:** 브라우저를 새로고침하여 박스가 훨씬 빠르고 많이 내려오는지 확인합니다.
+
+<br>
+
 
 ### 4단계: 모니터링 및 실습 종료
 서비스 중인 컨테이너를 관리하고 정리합니다.
