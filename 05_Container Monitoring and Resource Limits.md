@@ -12,8 +12,8 @@
     - `--vm-bytes <Size>`: 각 메모리 워커가 점유할 메모리 양을 설정합니다. (예: 128m)
     - `--timeout <Sec>`: 지정된 시간(초)이 지나면 부하 테스트를 자동으로 종료합니다.
 
-**#Dockerfile**
 ```dockerfile
+#Dockerfile
 FROM debian
 MAINTAINER Seongmi lee <seongmi.lee@gmail.com>
 RUN apt-get update; apt-get install stress -y
