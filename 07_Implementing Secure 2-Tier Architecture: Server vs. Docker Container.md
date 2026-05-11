@@ -193,7 +193,7 @@
 - 외부 연결 확인 : https://192.168.100.10
     
     
-    ![image.png](attachment:5a5e132b-ec96-46f6-9906-d407d809a343:image.png)
+    <img width="404" height="129" alt="Image" src="https://github.com/user-attachments/assets/d690ca78-7070-46f7-8e9e-a4a3a0c5da54" />
     
 - snapshot 되돌리기
 
@@ -400,8 +400,8 @@ docker network ls
 - 외부 연결 확인
     
     
-    ![image.png](attachment:7c525518-b838-464e-83b6-22d84784117b:image.png)
+    <img width="832" height="558" alt="Image" src="https://github.com/user-attachments/assets/9d8e2861-8c79-493b-a8fb-6d6a20d94833" />
     
-    ![image.png](attachment:93b7c6a0-96d8-46bb-8fe1-a64ab0ceb477:image.png)
+    <img width="751" height="574" alt="Image" src="https://github.com/user-attachments/assets/2893efdd-3d7a-46e4-81dc-b4b1efcad16a" />
     
     https://192.168.100.10:8080/ 접속 가능할까?
