@@ -1,9 +1,9 @@
 ## 1. 컨테이너 빌드 명령어
 
-- `docker build` 명령어는 Dockerfile에 기술된 지시어를 순차적으로 실행하여 도커 이미지(Image)를 생성하는 명령어
+- `docker build` 명령어는 Dockerfile에 기술된 지시어를 순차적으로 실행하여 **도커 이미지(Image)**를 생성하는 명령어
 - 기본 구문
     
-    docker build [옵션] <빌드 컨텍스트 경로>
+    `docker build [옵션] <빌드 컨텍스트 경로>`
     
 
 ### **1.1 간단한 도커 컨테이너 빌드**
