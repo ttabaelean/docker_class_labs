@@ -676,7 +676,113 @@ Step 4: 이미지 빌드 및 컨테이너 실행
 
 <br>
 
-## 3. Best Practice 집약형 실무 Dockerfile 실습
+### 3.1 Dockerfile에 Best Practice 예
+
+- 이미지 경량화 및 보안 (Rule 1, 5 적용)
+    
+    ```bash
+    FROM node:20
+    WORKDIR /app
+    COPY app.js .
+    # 기본적으로 root 계정으로 실행됨
+    CMD ["node", "app.js"]
+    ```
+    
+    - base image의 크기 줄이기 : node:20-alpine
+    - 기본적으로 root 계정으로 실행되지 않도록 구성하기
+    
+    ```bash
+    # 1. 경량화된 공식 이미지 사용 (Rule 1)
+    FROM node:20-alpine
+    WORKDIR /app
+    
+    # 2. 보안을 위해 일반 사용자 계정 사용 (Rule 5)
+    COPY --chown=node:node app.js .
+    USER node
+    CMD ["node", "app.js"]
+    ```
+    
+- 레이어 최적화 및 캐싱 활용 (Rule 2 적용)
+    
+    ```bash
+    FROM node:20-alpine
+    WORKDIR /app
+    # 소스 전체를 먼저 복사하면, 코드 한 줄만 바꿔도 npm install이 매번 다시 실행됨
+    COPY . .
+    RUN npm install
+    CMD ["node", "app.js"]
+    ```
+    
+    - 빌드 속도 최적화
+    - 소스 코드가 수정되어도 라이브러리 설치(`npm install`) 과정이 재사용되도록 레이어 순서를 최적화
+    
+    ```bash
+    FROM node:20-alpine
+    WORKDIR /app
+    # 1. 잘 변하지 않는 종속성 파일을 먼저 복사 (Rule 2)
+    COPY package.json .
+    RUN npm install
+    # 2. 자주 변하는 소스 코드는 마지막에 복사
+    COPY . .
+    CMD ["node", "app.js"]
+    ```
+    
+
+- 유연한 명령어 실행 (Rule 6 적용)
+    
+    ```bash
+    FROM python:3.9-slim
+    WORKDIR /app
+    COPY . .
+    # 실행 명령어가 통째로 고정되어 인자값 변경이 어려움
+    CMD ["python", "app.js"]
+    ```
+    
+    - 컨테이너 실행 시 기본 실행 파일은 고정하되, 인자값만 바꿔서 유연하게 대응할 수 있도록 수정
+    
+    ```bash
+    FROM python:3.9-slim
+    WORKDIR /app
+    COPY . .
+    # 1. 실행 바이너리는 ENTRYPOINT로 고정 (Rule 6)
+    ENTRYPOINT ["python"]
+    # 2. 기본 실행 파일은 CMD로 제공 (사용자가 변경 가능)
+    CMD ["app.js"]
+    ```
+    
+
+- Multi-stage Build 적용 (Rule 7 적용)
+    
+    ```bash
+    # 빌드 도구가 포함된 큰 이미지가 그대로 최종 이미지가 됨
+    FROM node:20
+    WORKDIR /app
+    COPY . .
+    RUN npm install && npm run build
+    CMD ["node", "dist/main.js"]
+    ```
+    
+    - Multi-stage Build
+    
+    ```bash
+    # 1. Build Stage: 빌드 도구가 포함된 이미지 사용 (Rule 7)
+    FROM node:20 AS builder
+    WORKDIR /app
+    COPY . .
+    RUN npm install && npm run build
+    
+    # 2. Run Stage: 실제 실행에 필요한 최소 환경만 구성
+    FROM node:20-alpine
+    WORKDIR /app
+    # 빌드 결과물만 쏙 빼오기
+    COPY --from=builder /app/dist ./dist
+    COPY --from=builder /app/node_modules ./node_modules
+    USER node
+    CMD ["node", "dist/main.js"]
+    ```
+    
+
+### 3.2 컨테이너 빌드
 
 - **실습 환경 준비**
     
@@ -706,12 +812,6 @@ Step 4: 이미지 빌드 및 컨테이너 실행
     EOF
     ```
     
-
-<br>
-
-
-### 컨테이너 빌드
-
 - Dockerfile 생성  (`Dockerfile.single`)
     
     ```bash
@@ -737,10 +837,7 @@ Step 4: 이미지 빌드 및 컨테이너 실행
     ```
     
 
-<br>
-
-
-### Best Practice 적용된 컨테이너 빌드
+### 3.3 Best Practice 적용된 컨테이너 빌드
 
 - Dockerfile 생성  (`Dockerfile.multi`)
     
@@ -772,10 +869,7 @@ Step 4: 이미지 빌드 및 컨테이너 실행
     ```
     
 
-<br>
-
-
-### 결과 확인
+### 3.4 결과 확인
 
 - 빌드가 완료되면 아래 명령어로 용량 차이를 확인
     
