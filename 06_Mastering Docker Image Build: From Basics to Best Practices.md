@@ -676,7 +676,6 @@ Step 4: 이미지 빌드 및 컨테이너 실행
 <br>
 
 ## **3. Best Practice 집약형 실무 Dockerfile 실습**
-##3. Best Practice 집약형 실무 Dockerfile 실습
 
 ### 3.1 Dockerfile에 Best Practice 예
 
