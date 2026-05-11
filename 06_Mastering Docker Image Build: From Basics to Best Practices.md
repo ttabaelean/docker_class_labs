@@ -1,6 +1,6 @@
 ## 1. 컨테이너 빌드 명령어
 
-- `docker build` 명령어는 Dockerfile에 기술된 지시어를 순차적으로 실행하여 **도커 이미지(Image)**를 생성하는 명령어
+- `docker build` 명령어는 Dockerfile에 기술된 지시어를 순차적으로 실행하여 도커 이미지(Image)를 생성하는 명령어
 - 기본 구문
     
     `docker build [옵션] <빌드 컨텍스트 경로>`
@@ -47,7 +47,7 @@
     
     - 웹 브라우저로 접속 TEST
         
-        ![image.png](attachment:3252833d-b7c8-44f6-be32-c95546d44bb4:image.png)
+        <img width="506" height="149" alt="Image" src="https://github.com/user-attachments/assets/0d562134-7f41-427a-9b86-ab5926d639bc" />
         
     
     ```bash
