@@ -470,8 +470,8 @@
     - 웹브라우저를 통해 외부 접속 확인: https://IP_Address
 
 
+---
 <br>
-
 
 ## **2. 애플리케이션 소스 코드를 포함한 컨테이너 빌드하기**
 
@@ -564,7 +564,6 @@
     crm
     ```
     
-
 <br>
 
 ### 2.2 🧑‍💻  퀴즈: Python 게임 애플리케이션 이미지 빌드 및 배포
@@ -673,8 +672,11 @@ Step 4: 이미지 빌드 및 컨테이너 실행
 - **결과 확인**: 웹 브라우저에서 `http://서버IP:8089`에 접속하여 게임이 돌아가는지 확인합니다.
 
 
-
+---
 <br>
+
+## **3. Best Practice 집약형 실무 Dockerfile 실습**
+##3. Best Practice 집약형 실무 Dockerfile 실습
 
 ### 3.1 Dockerfile에 Best Practice 예
 
@@ -701,6 +703,8 @@ Step 4: 이미지 빌드 및 컨테이너 실행
     USER node
     CMD ["node", "app.js"]
     ```
+
+<br>
     
 - 레이어 최적화 및 캐싱 활용 (Rule 2 적용)
     
@@ -727,6 +731,7 @@ Step 4: 이미지 빌드 및 컨테이너 실행
     CMD ["node", "app.js"]
     ```
     
+<br>
 
 - 유연한 명령어 실행 (Rule 6 적용)
     
@@ -749,7 +754,8 @@ Step 4: 이미지 빌드 및 컨테이너 실행
     # 2. 기본 실행 파일은 CMD로 제공 (사용자가 변경 가능)
     CMD ["app.js"]
     ```
-    
+
+<br>
 
 - Multi-stage Build 적용 (Rule 7 적용)
     
@@ -781,6 +787,7 @@ Step 4: 이미지 빌드 및 컨테이너 실행
     CMD ["node", "dist/main.js"]
     ```
     
+<br>
 
 ### 3.2 컨테이너 빌드
 
@@ -836,6 +843,7 @@ Step 4: 이미지 빌드 및 컨테이너 실행
     docker build -f Dockerfile.single -t node-app:single .
     ```
     
+<br>
 
 ### 3.3 Best Practice 적용된 컨테이너 빌드
 
@@ -868,6 +876,7 @@ Step 4: 이미지 빌드 및 컨테이너 실행
     docker build -f Dockerfile.multi -t node-app:multi .
     ```
     
+<br>
 
 ### 3.4 결과 확인
 
