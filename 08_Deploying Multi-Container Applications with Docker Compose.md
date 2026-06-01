@@ -6,6 +6,8 @@
 - 단 한 장의 설정 파일(`docker-compose.yml`)을 사용하여 다중 컨테이너 서비스 인프라를 일괄 구축하고 서비스를 연동합니다.
 - 데이터 영속성 관리를 위한 **볼륨(Volume)** 옵션과 컨테이너 간 기동 순서를 조율하는 **의존성(`depends_on`)** 키워드를 실무 관점에서 학습합니다.
 
+<br>
+
 ### 1.1 실습 디렉토리 생성 및 Workspace 이동
 
 - Docker Compose 전용 실습 디렉토리 생성 및 이동
@@ -15,6 +17,8 @@
     cd my_wordpress
     ```
     
+<br>
+
 
 ### 1.2 Docker Compose 파일 구성 (docker-compose.yml)
 
@@ -62,6 +66,8 @@
     - **depends_on**: 서비스 간 선후 기동 관계를 지정합니다. `db` 인프라 컨테이너가 먼저 준비된 것을 인식한 뒤 `wordpress` 서비스가 부팅되도록 순서를 보장합니다.
     - **environment**: 서비스 연동에 필요한 컨테이너 내부 데이터베이스 환경 변수를 선언합니다.
 
+<br>
+
 ### 1.3 Docker Compose 로 서비스 가동, 운영, 종료
 
 - 멀티 컨테이너 환경을 백그라운드로 일괄 실행
@@ -80,7 +86,7 @@
 - 웹 서비스 연동 및 결과 검증 : http://192.168.100.10:8000
     - 브라우저 창을 열고 Client 서버의 IP주소와 8000 포트로 접속하여 WordPress 초기 설치 및 세팅 화면이 정상 표출되는지 확인합니다.
     
-    !image.png
+   <img width="631" height="792" alt="Image" src="https://github.com/user-attachments/assets/68c08e42-bb6b-4872-8584-501d6b4a9ac2" />
     
 
 - 현재 실행 중인 WordPress 웹 서버와 MySQL 데이터베이스가 주고받는 로그를 실시간으로 확인
@@ -155,6 +161,9 @@
         ```
         
 
+<br>
+
+
 # 2. QUIZ: Docker Compose 기반 보안 강화형 2-Tier Application 서비스 운영
 
 ### 💡 실습 목적
@@ -163,7 +172,46 @@
 - 사용자의 일반 HTTP(80) 요청을 HTTPS(443) 보안 채널로 강제 전환하는 **SSL 리다이렉션**을 구현합니다.
 - WAS(Node.js)의 외부 포트를 완전히 닫고 프록시 서버만 개방하여 내부망을 격리하는 **인프라 보안**을 컴포즈 설계도 한 장으로 구현합니다.
     
-    !image.png
+    <img width="1194" height="1317" alt="Image" src="https://github.com/user-attachments/assets/6562f65b-db55-4530-8042-889d7ae380d5" />
     
 
 힌트:  dockercompose.yaml
+
+```bash
+cat << 'EOF' > docker-compose.yml
+version: "3.9"
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - wordpress_data:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+
+volumes:
+  db_data: {}
+  wordpress_data: {}
+EOF
+```
+
+
